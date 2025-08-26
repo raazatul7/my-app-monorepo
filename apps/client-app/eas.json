@@ -20,7 +20,7 @@
         "buildType": "apk"
       },
       "ios": {
-        "buildType": "archive"
+        "distribution": "internal"
       }
     },
     "dlf_customer": {
@@ -33,7 +33,7 @@
         "buildType": "apk"
       },
       "ios": {
-        "buildType": "archive"
+        "distribution": "internal"
       }
     }
   },

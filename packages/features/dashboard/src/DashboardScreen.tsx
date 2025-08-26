@@ -9,6 +9,20 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Card, Button, Text } from '@myapp/ui';
 import { DashboardStats, RecentActivity, QuickAction } from './types';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+// Define navigation types
+type RootStackParamList = {
+  dashboard: undefined;
+  scanner: undefined;
+  profile: undefined;
+};
+
+type DashboardScreenNavigationProp = StackNavigationProp<RootStackParamList, 'dashboard'>;
+
+interface DashboardScreenProps {
+  navigation: DashboardScreenNavigationProp;
+}
 
 // Dummy data for dashboard
 const dashboardStats: DashboardStats[] = [
@@ -94,10 +108,30 @@ const quickActions: QuickAction[] = [
 
 const { width } = Dimensions.get('window');
 
-export const DashboardScreen: React.FC = () => {
+export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
   const handleQuickAction = (action: string) => {
     console.log(`Quick action: ${action}`);
-    // Handle different quick actions here
+    
+    // Handle different quick actions with navigation
+    switch (action) {
+      case 'scan':
+        navigation.navigate('scanner');
+        break;
+      case 'add_user':
+        // Navigate to profile for user management
+        navigation.navigate('profile');
+        break;
+      case 'reports':
+        // Stay on dashboard for reports (could be expanded later)
+        console.log('Reports feature - staying on dashboard');
+        break;
+      case 'settings':
+        // Navigate to profile for settings
+        navigation.navigate('profile');
+        break;
+      default:
+        console.log(`Unknown action: ${action}`);
+    }
   };
 
   const getStatusColor = (status: string) => {
@@ -131,10 +165,32 @@ export const DashboardScreen: React.FC = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <Text variant="h1">Dashboard</Text>
-          <Text variant="body" color="#8E8E93">
-            Welcome back! Here's what's happening today.
-          </Text>
+          <View style={styles.headerTop}>
+            <View>
+              <Text variant="h1">Dashboard</Text>
+              <Text variant="body" color="#8E8E93">
+                Welcome back! Here's what's happening today.
+              </Text>
+            </View>
+            <View style={styles.headerActions}>
+              <Button
+                title="Scanner"
+                variant="outline"
+                size="small"
+                onPress={() => navigation.navigate('scanner')}
+                leftIcon={<Ionicons name="scan-outline" size={16} color="#007AFF" />}
+                style={styles.headerButton}
+              />
+              <Button
+                title="Profile"
+                variant="outline"
+                size="small"
+                onPress={() => navigation.navigate('profile')}
+                leftIcon={<Ionicons name="person-outline" size={16} color="#007AFF" />}
+                style={styles.headerButton}
+              />
+            </View>
+          </View>
         </View>
 
         {/* Statistics Grid */}
@@ -226,6 +282,19 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     paddingBottom: 10,
+  },
+  headerTop: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  headerActions: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  headerButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
   },
   statsContainer: {
     flexDirection: 'row',

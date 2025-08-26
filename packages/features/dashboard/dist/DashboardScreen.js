@@ -82,10 +82,29 @@ const quickActions = [
     { id: '4', title: 'Settings', icon: 'settings-outline', action: 'settings' },
 ];
 const { width } = Dimensions.get('window');
-export const DashboardScreen = () => {
+export const DashboardScreen = ({ navigation }) => {
     const handleQuickAction = (action) => {
         console.log(`Quick action: ${action}`);
-        // Handle different quick actions here
+        // Handle different quick actions with navigation
+        switch (action) {
+            case 'scan':
+                navigation.navigate('scanner');
+                break;
+            case 'add_user':
+                // Navigate to profile for user management
+                navigation.navigate('profile');
+                break;
+            case 'reports':
+                // Stay on dashboard for reports (could be expanded later)
+                console.log('Reports feature - staying on dashboard');
+                break;
+            case 'settings':
+                // Navigate to profile for settings
+                navigation.navigate('profile');
+                break;
+            default:
+                console.log(`Unknown action: ${action}`);
+        }
     };
     const getStatusColor = (status) => {
         switch (status) {
@@ -111,7 +130,7 @@ export const DashboardScreen = () => {
                 return 'ellipse-outline';
         }
     };
-    return (_jsx(SafeAreaView, { style: styles.container, children: _jsxs(ScrollView, { showsVerticalScrollIndicator: false, children: [_jsxs(View, { style: styles.header, children: [_jsx(Text, { variant: "h1", children: "Dashboard" }), _jsx(Text, { variant: "body", color: "#8E8E93", children: "Welcome back! Here's what's happening today." })] }), _jsx(View, { style: styles.statsContainer, children: dashboardStats.map((stat) => (_jsx(Card, { variant: "elevated", style: styles.statCard, children: _jsxs(View, { style: styles.statContent, children: [_jsx(View, { style: [styles.statIcon, { backgroundColor: stat.color + '20' }], children: _jsx(Ionicons, { name: stat.icon, size: 24, color: stat.color }) }), _jsxs(View, { style: styles.statText, children: [_jsx(Text, { variant: "h2", color: stat.color, children: stat.value }), _jsx(Text, { variant: "caption", children: stat.title }), _jsxs(View, { style: styles.statChange, children: [_jsx(Ionicons, { name: stat.changeType === 'positive' ? 'trending-up' : 'trending-down', size: 12, color: stat.changeType === 'positive' ? '#34C759' : '#FF3B30' }), _jsx(Text, { variant: "caption", color: stat.changeType === 'positive' ? '#34C759' : '#FF3B30', style: styles.changeText, children: stat.change })] })] })] }) }, stat.id))) }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Quick Actions" }), _jsx(View, { style: styles.quickActionsGrid, children: quickActions.map((action) => (_jsx(Button, { title: action.title, variant: "outline", size: "small", style: styles.quickActionButton, onPress: () => handleQuickAction(action.action), leftIcon: _jsx(Ionicons, { name: action.icon, size: 16, color: "#007AFF", style: styles.actionIcon }) }, action.id))) })] }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Recent Activities" }), recentActivities.map((activity) => (_jsx(Card, { variant: "outlined", style: styles.activityCard, children: _jsxs(View, { style: styles.activityContent, children: [_jsx(View, { style: styles.activityIcon, children: _jsx(Ionicons, { name: getStatusIcon(activity.status), size: 20, color: getStatusColor(activity.status) }) }), _jsxs(View, { style: styles.activityDetails, children: [_jsx(Text, { variant: "body", weight: "600", children: activity.title }), _jsx(Text, { variant: "caption", children: activity.description }), _jsx(Text, { variant: "caption", color: "#C7C7CC", children: activity.timestamp })] })] }) }, activity.id)))] }), _jsx(View, { style: styles.bottomSpacing })] }) }));
+    return (_jsx(SafeAreaView, { style: styles.container, children: _jsxs(ScrollView, { showsVerticalScrollIndicator: false, children: [_jsx(View, { style: styles.header, children: _jsxs(View, { style: styles.headerTop, children: [_jsxs(View, { children: [_jsx(Text, { variant: "h1", children: "Dashboard" }), _jsx(Text, { variant: "body", color: "#8E8E93", children: "Welcome back! Here's what's happening today." })] }), _jsxs(View, { style: styles.headerActions, children: [_jsx(Button, { title: "Scanner", variant: "outline", size: "small", onPress: () => navigation.navigate('scanner'), leftIcon: _jsx(Ionicons, { name: "scan-outline", size: 16, color: "#007AFF" }), style: styles.headerButton }), _jsx(Button, { title: "Profile", variant: "outline", size: "small", onPress: () => navigation.navigate('profile'), leftIcon: _jsx(Ionicons, { name: "person-outline", size: 16, color: "#007AFF" }), style: styles.headerButton })] })] }) }), _jsx(View, { style: styles.statsContainer, children: dashboardStats.map((stat) => (_jsx(Card, { variant: "elevated", style: styles.statCard, children: _jsxs(View, { style: styles.statContent, children: [_jsx(View, { style: [styles.statIcon, { backgroundColor: stat.color + '20' }], children: _jsx(Ionicons, { name: stat.icon, size: 24, color: stat.color }) }), _jsxs(View, { style: styles.statText, children: [_jsx(Text, { variant: "h2", color: stat.color, children: stat.value }), _jsx(Text, { variant: "caption", children: stat.title }), _jsxs(View, { style: styles.statChange, children: [_jsx(Ionicons, { name: stat.changeType === 'positive' ? 'trending-up' : 'trending-down', size: 12, color: stat.changeType === 'positive' ? '#34C759' : '#FF3B30' }), _jsx(Text, { variant: "caption", color: stat.changeType === 'positive' ? '#34C759' : '#FF3B30', style: styles.changeText, children: stat.change })] })] })] }) }, stat.id))) }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Quick Actions" }), _jsx(View, { style: styles.quickActionsGrid, children: quickActions.map((action) => (_jsx(Button, { title: action.title, variant: "outline", size: "small", style: styles.quickActionButton, onPress: () => handleQuickAction(action.action), leftIcon: _jsx(Ionicons, { name: action.icon, size: 16, color: "#007AFF", style: styles.actionIcon }) }, action.id))) })] }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Recent Activities" }), recentActivities.map((activity) => (_jsx(Card, { variant: "outlined", style: styles.activityCard, children: _jsxs(View, { style: styles.activityContent, children: [_jsx(View, { style: styles.activityIcon, children: _jsx(Ionicons, { name: getStatusIcon(activity.status), size: 20, color: getStatusColor(activity.status) }) }), _jsxs(View, { style: styles.activityDetails, children: [_jsx(Text, { variant: "body", weight: "600", children: activity.title }), _jsx(Text, { variant: "caption", children: activity.description }), _jsx(Text, { variant: "caption", color: "#C7C7CC", children: activity.timestamp })] })] }) }, activity.id)))] }), _jsx(View, { style: styles.bottomSpacing })] }) }));
 };
 const styles = StyleSheet.create({
     container: {
@@ -121,6 +140,19 @@ const styles = StyleSheet.create({
     header: {
         padding: 20,
         paddingBottom: 10,
+    },
+    headerTop: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+    },
+    headerActions: {
+        flexDirection: 'row',
+        gap: 10,
+    },
+    headerButton: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
     },
     statsContainer: {
         flexDirection: 'row',

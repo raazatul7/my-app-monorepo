@@ -10,6 +10,20 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Card, Button, Text } from '@myapp/ui';
 import { UserProfile, ProfileSection, ProfileMenuItem } from './types';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+// Define navigation types
+type RootStackParamList = {
+  dashboard: undefined;
+  scanner: undefined;
+  profile: undefined;
+};
+
+type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, 'profile'>;
+
+interface ProfileScreenProps {
+  navigation: ProfileScreenNavigationProp;
+}
 
 // Dummy user profile data
 const userProfile: UserProfile = {
@@ -139,7 +153,7 @@ const profileSections: ProfileSection[] = [
   },
 ];
 
-export const ProfileScreen: React.FC = () => {
+export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const handleProfileAction = (action: string) => {
     console.log(`Profile action: ${action}`);
     // Handle different profile actions here
@@ -224,9 +238,24 @@ export const ProfileScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Profile Header */}
+        {/* Header */}
         <View style={styles.header}>
-          <Text variant="h1">Profile</Text>
+          <View style={styles.headerTop}>
+            <View>
+              <Text variant="h1">Profile</Text>
+              <Text variant="body" color="#8E8E93">
+                Manage your account and preferences
+              </Text>
+            </View>
+            <Button
+              title="Dashboard"
+              variant="outline"
+              size="small"
+              onPress={() => navigation.navigate('dashboard')}
+              leftIcon={<Ionicons name="home-outline" size={16} color="#007AFF" />}
+              style={styles.headerButton}
+            />
+          </View>
         </View>
 
         {/* Profile Information */}
@@ -262,6 +291,15 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     paddingBottom: 10,
+  },
+  headerTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   profileHeader: {
     margin: 20,

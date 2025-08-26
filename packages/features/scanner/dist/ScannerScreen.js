@@ -57,7 +57,7 @@ const scanHistory = [
     },
 ];
 const { width, height } = Dimensions.get('window');
-export const ScannerScreen = () => {
+export const ScannerScreen = ({ navigation }) => {
     const [selectedMode, setSelectedMode] = useState('auto');
     const [isScanning, setIsScanning] = useState(false);
     const scanModes = [
@@ -138,7 +138,7 @@ export const ScannerScreen = () => {
     const getStatusIcon = (status) => {
         return status === 'success' ? 'checkmark-circle' : 'close-circle';
     };
-    return (_jsx(SafeAreaView, { style: styles.container, children: _jsxs(ScrollView, { showsVerticalScrollIndicator: false, children: [_jsxs(View, { style: styles.header, children: [_jsx(Text, { variant: "h1", children: "Scanner" }), _jsx(Text, { variant: "body", color: "#8E8E93", children: "Scan QR codes, barcodes, and text with your camera" })] }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Scan Mode" }), _jsx(View, { style: styles.modeGrid, children: scanModes.map((modeInfo) => (_jsxs(TouchableOpacity, { style: [
+    return (_jsx(SafeAreaView, { style: styles.container, children: _jsxs(ScrollView, { showsVerticalScrollIndicator: false, children: [_jsx(View, { style: styles.header, children: _jsxs(View, { style: styles.headerTop, children: [_jsxs(View, { children: [_jsx(Text, { variant: "h1", children: "Scanner" }), _jsx(Text, { variant: "body", color: "#8E8E93", children: "Scan QR codes, barcodes, and text with your camera" })] }), _jsx(Button, { title: "Dashboard", variant: "outline", size: "small", onPress: () => navigation.navigate('dashboard'), leftIcon: _jsx(Ionicons, { name: "home-outline", size: 16, color: "#007AFF" }), style: styles.headerButton })] }) }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Scan Mode" }), _jsx(View, { style: styles.modeGrid, children: scanModes.map((modeInfo) => (_jsxs(TouchableOpacity, { style: [
                                     styles.modeCard,
                                     selectedMode === modeInfo.mode && styles.selectedModeCard,
                                 ], onPress: () => handleScanModeSelect(modeInfo.mode), children: [_jsx(View, { style: styles.modeIcon, children: _jsx(Ionicons, { name: modeInfo.icon, size: 32, color: selectedMode === modeInfo.mode ? '#007AFF' : '#8E8E93' }) }), _jsx(Text, { variant: "body", weight: "600", color: selectedMode === modeInfo.mode ? '#007AFF' : '#000000', children: modeInfo.title }), _jsx(Text, { variant: "caption", color: "#8E8E93", align: "center", children: modeInfo.description })] }, modeInfo.mode))) })] }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Scanner Controls" }), _jsxs(Card, { variant: "elevated", style: styles.controlsCard, children: [_jsxs(View, { style: styles.controlInfo, children: [_jsx(View, { style: styles.controlIcon, children: _jsx(Ionicons, { name: "camera-outline", size: 24, color: "#007AFF" }) }), _jsxs(View, { style: styles.controlText, children: [_jsx(Text, { variant: "body", weight: "600", children: "Camera Scanner" }), _jsxs(Text, { variant: "caption", color: "#8E8E93", children: ["Selected mode: ", selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)] })] })] }), _jsx(Button, { title: isScanning ? 'Stop Scan' : 'Start Scan', variant: isScanning ? 'danger' : 'primary', size: "large", fullWidth: true, onPress: handleStartScan, leftIcon: _jsx(Ionicons, { name: isScanning ? 'stop-circle-outline' : 'play-circle-outline', size: 20, color: "#FFFFFF" }) })] })] }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Quick Actions" }), _jsxs(View, { style: styles.quickActions, children: [_jsx(Button, { title: "Manual Input", variant: "outline", size: "medium", style: styles.quickActionButton, onPress: () => console.log('Manual input pressed'), leftIcon: _jsx(Ionicons, { name: "keypad-outline", size: 16, color: "#007AFF" }) }), _jsx(Button, { title: "Import File", variant: "outline", size: "medium", style: styles.quickActionButton, onPress: () => console.log('Import file pressed'), leftIcon: _jsx(Ionicons, { name: "folder-open-outline", size: 16, color: "#007AFF" }) })] })] }), _jsxs(View, { style: styles.section, children: [_jsx(Text, { variant: "h3", style: styles.sectionTitle, children: "Recent Scans" }), scanHistory.map((result) => (_jsx(TouchableOpacity, { onPress: () => handleHistoryItemPress(result), children: _jsx(Card, { variant: "outlined", style: styles.historyCard, children: _jsxs(View, { style: styles.historyContent, children: [_jsx(View, { style: styles.historyIcon, children: _jsx(Ionicons, { name: getScanModeIcon(result.type), size: 24, color: "#007AFF" }) }), _jsxs(View, { style: styles.historyDetails, children: [_jsx(Text, { variant: "body", weight: "500", children: result.data }), _jsxs(Text, { variant: "caption", color: "#8E8E93", children: [result.metadata?.format, " \u2022 ", result.timestamp] }), result.metadata?.description && (_jsx(Text, { variant: "caption", color: "#8E8E93", children: result.metadata.description }))] }), _jsx(View, { style: styles.historyStatus, children: _jsx(Ionicons, { name: getStatusIcon(result.status), size: 20, color: getStatusColor(result.status) }) })] }) }) }, result.id)))] }), _jsx(View, { style: styles.bottomSpacing })] }) }));
@@ -151,6 +151,14 @@ const styles = StyleSheet.create({
     header: {
         padding: 20,
         paddingBottom: 10,
+    },
+    headerTop: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    headerButton: {
+        marginLeft: 10,
     },
     section: {
         paddingHorizontal: 20,

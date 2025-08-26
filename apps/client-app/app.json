@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "ed3cf5ea-4394-4dea-802c-2f4497f5eda1"
+      }
+    },
+    "android": {
+      "package": "com.raazatul7.clientapp"
+    }
+  }
+}

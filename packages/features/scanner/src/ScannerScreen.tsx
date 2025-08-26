@@ -11,6 +11,20 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Card, Button, Text } from '@myapp/ui';
 import { ScanResult, ScanMode } from './types';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+// Define navigation types
+type RootStackParamList = {
+  dashboard: undefined;
+  scanner: undefined;
+  profile: undefined;
+};
+
+type ScannerScreenNavigationProp = StackNavigationProp<RootStackParamList, 'scanner'>;
+
+interface ScannerScreenProps {
+  navigation: ScannerScreenNavigationProp;
+}
 
 // Dummy scan history data
 const scanHistory: ScanResult[] = [
@@ -68,7 +82,7 @@ const scanHistory: ScanResult[] = [
 
 const { width, height } = Dimensions.get('window');
 
-export const ScannerScreen: React.FC = () => {
+export const ScannerScreen: React.FC<ScannerScreenProps> = ({ navigation }) => {
   const [selectedMode, setSelectedMode] = useState<ScanMode>('auto');
   const [isScanning, setIsScanning] = useState(false);
 
@@ -171,10 +185,22 @@ export const ScannerScreen: React.FC = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <Text variant="h1">Scanner</Text>
-          <Text variant="body" color="#8E8E93">
-            Scan QR codes, barcodes, and text with your camera
-          </Text>
+          <View style={styles.headerTop}>
+            <View>
+              <Text variant="h1">Scanner</Text>
+              <Text variant="body" color="#8E8E93">
+                Scan QR codes, barcodes, and text with your camera
+              </Text>
+            </View>
+            <Button
+              title="Dashboard"
+              variant="outline"
+              size="small"
+              onPress={() => navigation.navigate('dashboard')}
+              leftIcon={<Ionicons name="home-outline" size={16} color="#007AFF" />}
+              style={styles.headerButton}
+            />
+          </View>
         </View>
 
         {/* Scanner Mode Selection */}
@@ -323,6 +349,14 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     paddingBottom: 10,
+  },
+  headerTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerButton: {
+    marginLeft: 10,
   },
   section: {
     paddingHorizontal: 20,
