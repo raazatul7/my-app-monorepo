@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@myapp/core": ["../../packages/core/src"],
+      "@myapp/ui": ["../../packages/ui/src"],
+      "@myapp/features-dashboard": ["../../packages/features/dashboard/src"],
+      "@myapp/features-scanner": ["../../packages/features/scanner/src"],
+      "@myapp/features-profile": ["../../packages/features/profile/src"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../../packages/core/src/**/*",
+    "../../packages/ui/src/**/*",
+    "../../packages/features/dashboard/src/**/*",
+    "../../packages/features/scanner/src/**/*",
+    "../../packages/features/profile/src/**/*",
+    "../../config/**/*"
+  ],
+  "extends": "../../config/tsconfig.base.json"
+}

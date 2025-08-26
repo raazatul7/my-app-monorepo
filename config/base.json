@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "Base App",
+    "version": "1.0.0",
+    "buildNumber": "1"
+  },
+  "features": {
+    "scanner": {
+      "enabled": true,
+      "permissions": ["camera"]
+    },
+    "dashboard": {
+      "enabled": true,
+      "defaultView": "overview"
+    },
+    "profile": {
+      "enabled": true,
+      "editable": true
+    }
+  },
+  "api": {
+    "baseUrl": "https://api.example.com",
+    "timeout": 30000,
+    "retryAttempts": 3
+  },
+  "ui": {
+    "theme": "light",
+    "primaryColor": "#007AFF",
+    "fontFamily": "System"
+  }
+}

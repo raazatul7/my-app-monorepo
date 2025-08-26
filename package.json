@@ -1,0 +1,49 @@
+{
+  "name": "my-app-monorepo",
+  "version": "1.0.0",
+  "description": "Configuration-driven mobile app monorepo using Expo and Turborepo",
+  "private": true,
+  "packageManager": "npm@10.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "packages/features/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "build:dlf-client": "cd apps/client-app && eas build --profile dlf_client",
+    "build:dlf-customer": "cd apps/customer-app && eas build --profile dlf_customer",
+    "update:dlf": "eas update --channel dlf_client",
+    "install:client": "cd apps/client-app && expo install",
+    "install:customer": "cd apps/customer-app && expo install",
+    "start:client": "cd apps/client-app && expo start",
+    "start:customer": "cd apps/customer-app && expo start",
+    "clean:all": "rm -rf node_modules packages/*/node_modules apps/*/node_modules packages/*/dist packages/*/.turbo packages/*/tsconfig.tsbuildinfo packages/*/*/tsconfig.tsbuildinfo packages/*/*/dist packages/*/*/.turbo && npm install"
+  },
+  "keywords": [
+    "monorepo",
+    "expo",
+    "react-native",
+    "turborepo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "turbo": "^2.5.6",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/stack": "^7.4.7",
+    "react-native-gesture-handler": "^2.28.0",
+    "react-native-safe-area-context": "^5.6.1",
+    "react-native-screens": "^4.15.3"
+  }
+}

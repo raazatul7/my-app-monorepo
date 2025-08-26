@@ -1,0 +1,43 @@
+{
+  "cli": {
+    "version": ">= 5.0.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {},
+    "dlf_client": {
+      "extends": "production",
+      "env": {
+        "CLIENT_CONFIG": "dlf"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildType": "archive"
+      }
+    },
+    "dlf_customer": {
+      "extends": "production",
+      "env": {
+        "CLIENT_CONFIG": "dlf",
+        "APP_TYPE": "customer"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildType": "archive"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

@@ -1,0 +1,2 @@
+// Scanner feature types
+export {};

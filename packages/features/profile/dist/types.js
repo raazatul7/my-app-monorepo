@@ -1,0 +1,2 @@
+// Profile feature types
+export {};

@@ -1,0 +1,33 @@
+{
+  "name": "@myapp/features-scanner",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build", 
+    "dev": "tsc --watch",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "expo-camera": "~13.6.0",
+    "expo-barcode-scanner": "~12.9.0",
+    "@myapp/ui": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.70.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0"
+  }
+}

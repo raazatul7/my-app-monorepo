@@ -1,0 +1,39 @@
+{
+  "extends": "./base.json",
+  "client": {
+    "id": "dlf",
+    "name": "DLF",
+    "displayName": "DLF Client App"
+  },
+  "app": {
+    "name": "DLF Client",
+    "bundleId": "com.dlf.client",
+    "icon": "./assets/dlf-icon.png"
+  },
+  "branding": {
+    "primaryColor": "#1E40AF",
+    "secondaryColor": "#3B82F6",
+    "logo": "./assets/dlf-logo.png",
+    "splashScreen": "./assets/dlf-splash.png"
+  },
+  "features": {
+    "scanner": {
+      "enabled": true,
+      "scanTypes": ["qr", "barcode", "nfc"],
+      "customScanUI": true
+    },
+    "dashboard": {
+      "enabled": true,
+      "defaultView": "analytics",
+      "widgets": ["revenue", "orders", "inventory"]
+    }
+  },
+  "api": {
+    "baseUrl": "https://api.dlf.com",
+    "endpoints": {
+      "auth": "/auth/dlf",
+      "orders": "/orders/dlf",
+      "inventory": "/inventory/dlf"
+    }
+  }
+}
